@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyEpitaph | The Unified Legacy Engine</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { 
+            --heaven-bg: #fffbf0; /* Warm Alabaster/Cream */
+        }
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background-color: var(--heaven-bg);
+            color: #422006; /* Warm deep brown */
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        
+        /* Ascending Sky Background */
+        .bg-ascension {
+            background-image: url('https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=2000&auto=format&fit=crop'); /* Light rays through warm clouds */
+            background-size: cover;
+            background-position: center bottom;
+            background-attachment: fixed;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -20;
+            opacity: 0.35; 
+        }
+
+        /* Ethereal Glassmorphism */
+        .glass-card {
+            background: rgba(255, 252, 245, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 40px -10px rgba(217, 119, 6, 0.08); /* Amber shadow */
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px -12px rgba(217, 119, 6, 0.15);
+            background: rgba(255, 255, 255, 0.85);
+        }
+        
+        /* Buttons */
+        .ethereal-button {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #fff;
+            box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.4);
+            transition: all 0.3s ease;
+        }
+        .ethereal-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px -5px rgba(217, 119, 6, 0.5);
+            background: linear-gradient(135deg, #fbbf24 0%, #b45309 100%);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float { animation: float 8s ease-in-out infinite; }
+        .animate-float-delayed { animation: float 10s ease-in-out infinite 2s; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { motion } = window.Motion;
+
+        const apiKey = ""; // Insert Key for demo
+        const GEMINI_MODEL = "gemini-2.5-flash-preview-09-2025";
+
+        const callGemini = async (userPrompt) => {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: userPrompt }] }],
+                systemInstruction: { parts: [{ text: "You are the StillSpeaking AI. Generate a short, comforting, 2-sentence message from a digital persona to their family. Tone: Peaceful, warm, and loving." }] }
+            };
+            const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+            const result = await response.json();
+            return result.candidates?.[0]?.content?.parts?.[0]?.text;
+        };
+
+        const Icon = ({ name, className = "w-5 h-5" }) => {
+            useEffect(() => { lucide.createIcons(); }, []);
+            return <i data-lucide={name} className={className}></i>;
+        };
+
+        const App = () => {
+            const [scrolled, setScrolled] = useState(false);
+            const [aiInput, setAiInput] = useState("");
+            const [aiOutput, setAiOutput] = useState("");
+            const [loading, setLoading] = useState(false);
+            const [showContactModal, setShowContactModal] = useState(false);
+            const [formState, setFormState] = useState({ name: '', email: '', company: '', phone: '' });
+            const [formStatus, setFormStatus] = useState('idle');
+
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 20);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const handleDemo = async () => {
+                if (!aiInput) return;
+                setLoading(true);
+                try {
+                    const res = await callGemini(aiInput);
+                    setAiOutput(res);
+                } catch (e) { console.error(e); }
+                finally { setLoading(false); }
+            };
+
+            const handleOpenModal = (e) => {
+                e.preventDefault();
+                setShowContactModal(true);
+            };
+
+            const handleCloseModal = () => {
+                setShowContactModal(false);
+                // Wait for exit animation before resetting form
+                setTimeout(() => {
+                    setFormStatus('idle');
+                    setFormState({ name: '', email: '', company: '', phone: '' });
+                }, 300);
+            };
+
+            const handleFormSubmit = (e) => {
+                e.preventDefault();
+                setFormStatus('submitting');
+                // Simulate network request to send investor details
+                setTimeout(() => {
+                    setFormStatus('success');
+                }, 1500);
+            };
+
+            const fadeUp = {
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+            };
+
+            return (
+                <div className="min-h-screen relative">
+                    {/* Background Imagery & Overlays */}
+                    <div className="bg-ascension"></div>
+                    <div className="fixed inset-0 bg-gradient-to-b from-[#fffbf0]/40 via-[#fffbf0]/60 to-[#fffbf0]/95 pointer-events-none -z-10"></div>
+
+                    {/* Navigation */}
+                    <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'py-4' : 'py-8'}`}>
+                        <div className="max-w-7xl mx-auto px-6">
+                            <div className={`flex justify-between items-center px-8 py-4 rounded-full transition-all duration-500 ${scrolled ? 'bg-white/80 backdrop-blur-xl border border-white/60 shadow-lg shadow-amber-100/30' : 'bg-transparent'}`}>
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full ethereal-button flex items-center justify-center text-white shadow-md">
+                                        <Icon name="feather" className="w-5 h-5" />
+                                    </div>
+                                    <span className="text-xl font-extrabold tracking-tight text-slate-800 uppercase">MyEpitaph<span className="text-amber-500">.tech</span></span>
+                                </div>
+                                <div className="hidden lg:flex gap-8 items-center text-[12px] font-bold uppercase tracking-[0.2em] text-slate-500">
+                                    <a href="#philosophy" className="hover:text-amber-600 transition-colors">Philosophy</a>
+                                    <a href="#features" className="hover:text-amber-600 transition-colors">Platform</a>
+                                    <a href="#security" className="hover:text-amber-600 transition-colors">Security</a>
+                                    <a href="#financials" className="hover:text-amber-600 transition-colors">Funding</a>
+                                    <button onClick={handleOpenModal} className="ethereal-button px-6 py-2.5 rounded-full font-bold shadow-md transform hover:scale-105 transition-all text-[11px] flex items-center gap-2 cursor-pointer">
+                                        Request Prototype <Icon name="lock" className="w-3 h-3" />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+
+                    {}
+                    <header className="relative pt-48 pb-32 px-6 min-h-screen flex flex-col justify-center">
+                        <div className="max-w-5xl mx-auto text-center relative z-10">
+                            <motion.div 
+                                initial="hidden"
+                                animate="visible"
+                                variants={fadeUp}
+                                className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-white/70 border border-amber-100 text-amber-700 text-[11px] font-bold tracking-[0.25em] uppercase mb-10 shadow-sm backdrop-blur-md"
+                            >
+                                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                                Live Prototype Available Upon Request
+                            </motion.div>
+                            
+                            <motion.h1 
+                                initial="hidden"
+                                animate="visible"
+                                variants={fadeUp}
+                                transition={{ delay: 0.1 }}
+                                className="text-5xl lg:text-8xl font-serif font-medium leading-[1.05] text-slate-800 mb-8"
+                            >
+                                The Unified <br/>
+                                <span className="italic text-amber-600">Legacy Engine.</span>
+                            </motion.h1>
+                            
+                            <motion.p 
+                                initial="hidden"
+                                animate="visible"
+                                variants={fadeUp}
+                                transition={{ delay: 0.2 }}
+                                className="text-xl lg:text-2xl text-slate-600 max-w-3xl mx-auto mb-14 font-light leading-relaxed font-serif"
+                            >
+                                Bridging the gap between life and the digital afterlife. We are raising <strong>HKD 4.5M</strong> to scale the world's first Zero-Knowledge platform for emotional and administrative legacy.
+                            </motion.p>
+                            
+                            <motion.div 
+                                initial="hidden"
+                                animate="visible"
+                                variants={fadeUp}
+                                transition={{ delay: 0.3 }}
+                                className="flex flex-col sm:flex-row justify-center gap-6"
+                            >
+                                <button onClick={handleOpenModal} className="ethereal-button px-10 py-4 rounded-full text-lg font-bold flex items-center justify-center gap-3 shadow-xl text-white cursor-pointer">
+                                    <Icon name="lock" /> Request Prototype Access
+                                </button>
+                                <a href="mailto:investors@myepitaph.tech?subject=Requesting%20Pitch%20Deck" className="bg-white/80 text-slate-700 border border-amber-200/50 px-10 py-4 rounded-full text-lg font-bold hover:bg-white transition-all shadow-sm flex items-center justify-center">
+                                    Request Pitch Deck
+                                </a>
+                            </motion.div>
+                        </div>
+                    </header>
+
+                    {}
+                    <section id="philosophy" className="py-24 relative z-10">
+                        <div className="max-w-7xl mx-auto px-6">
+                            <motion.div 
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                className="glass-card p-12 lg:p-20 rounded-[50px] text-center"
+                            >
+                                <h2 className="text-4xl lg:text-5xl font-serif font-medium text-slate-800 mb-10">The Digital Divide of Grief</h2>
+                                <p className="text-xl text-slate-600 font-light leading-relaxed max-w-4xl mx-auto mb-16">
+                                    In a hyper-connected world, a person leaves behind two trails. Bereaved families are forced to mourn while simultaneously deciphering passwords, uncoordinated final wishes, and hidden assets.
+                                </p>
+                                
+                                <div className="grid md:grid-cols-2 gap-12">
+                                    <div className="p-8 bg-amber-50/50 rounded-[30px] border border-amber-100/50 text-left">
+                                        <div className="w-12 h-12 bg-amber-200/50 rounded-full flex items-center justify-center text-amber-700 mb-6">
+                                            <Icon name="heart" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-slate-800 mb-3">The Emotional Legacy</h3>
+                                        <p className="text-slate-600 leading-relaxed">Sentiments, personal guidance, memories, and farewell messages meant for loved ones, often lost or unspoken.</p>
+                                    </div>
+                                    <div className="p-8 bg-sky-50/50 rounded-[30px] border border-sky-100/50 text-left">
+                                        <div className="w-12 h-12 bg-sky-200/50 rounded-full flex items-center justify-center text-sky-700 mb-6">
+                                            <Icon name="briefcase" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-slate-800 mb-3">The Administrative Reality</h3>
+                                        <p className="text-slate-600 leading-relaxed">Locked digital accounts, subscriptions, hidden physical documents, and uncommunicated funeral arrangements.</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </div>
+                    </section>
+
+                    {}
+                    <section id="features" className="py-32 relative">
+                        <div className="max-w-7xl mx-auto px-6">
+                            <div className="text-center mb-24">
+                                <h2 className="text-4xl lg:text-6xl font-serif font-medium text-slate-800 mb-6">Comprehensive Feature Matrix</h2>
+                                <p className="text-slate-600 font-light text-lg max-w-3xl mx-auto">
+                                    A structured, dignified platform connecting the Legacy Creator with their Trusted Executors.
+                                </p>
+                            </div>
+
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {/* Feature 1 */}
+                                <motion.div whileHover={{ y: -8 }} className="glass-card p-10 rounded-[40px]">
+                                    <div className="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center text-amber-600 mb-6 shadow-sm">
+                                        <Icon name="mail" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-800 mb-3">My Epitaphs</h3>
+                                    <p className="text-slate-600 text-sm leading-relaxed">
+                                        Compose deeply personal, AES-256 encrypted farewell letters. Locked in an active state until formally released by your verified Executor via Email, WhatsApp, or SMS.
+                                    </p>
+                                </motion.div>
+
+                                {/* Feature 2 */}
+                                <motion.div whileHover={{ y: -8 }} className="glass-card p-10 rounded-[40px]">
+                                    <div className="w-14 h-14 rounded-2xl bg-sky-100 flex items-center justify-center text-sky-600 mb-6 shadow-sm">
+                                        <Icon name="calendar-clock" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-800 mb-3">Still Speaking AI</h3>
+                                    <p className="text-slate-600 text-sm leading-relaxed">
+                                        Schedule future messages for milestone dates. Powered by a dual-dispatch engine with background cron gateways and client-session fallbacks.
+                                    </p>
+                                </motion.div>
+
+                                {/* Feature 3 */}
+                                <motion.div whileHover={{ y: -8 }} className="glass-card p-10 rounded-[40px]">
+                                    <div className="w-14 h-14 rounded-2xl bg-teal-100 flex items-center justify-center text-teal-600 mb-6 shadow-sm">
+                                        <Icon name="box" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-800 mb-3">3D Casket Designer</h3>
+                                    <p className="text-slate-600 text-sm leading-relaxed">
+                                        Interactive WebGL canvas to design eco-friendly vessels. Uses Gemini AI for bespoke textures. Includes Stripe integration for prepaid, executor-released orders.
+                                    </p>
+                                </motion.div>
+
+                                {/* Feature 4 */}
+                                <motion.div whileHover={{ y: -8 }} className="glass-card p-10 rounded-[40px]">
+                                    <div className="w-14 h-14 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-600 mb-6 shadow-sm">
+                                        <Icon name="lock" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-800 mb-3">Digital Vault</h3>
+                                    <p className="text-slate-600 text-sm leading-relaxed">
+                                        Document instructions for social media closures, physical asset registries (real estate, heirlooms, pet adoption), and financial account mapping securely.
+                                    </p>
+                                </motion.div>
+
+                                {/* Feature 5 */}
+                                <motion.div whileHover={{ y: -8 }} className="glass-card p-10 rounded-[40px]">
+                                    <div className="w-14 h-14 rounded-2xl bg-rose-100 flex items-center justify-center text-rose-600 mb-6 shadow-sm">
+                                        <Icon name="users" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-800 mb-3">Executor Protocol</h3>
+                                    <p className="text-slate-600 text-sm leading-relaxed">
+                                        Multi-executor authorization with unique cryptographic keypairs. Includes a "Dead Man's Switch" automated heartbeat protocol to initiate outreach if check-ins are missed.
+                                    </p>
+                                </motion.div>
+                                
+                                {/* Feature 6 */}
+                                <motion.div whileHover={{ y: -8 }} className="glass-card p-10 rounded-[40px]">
+                                    <div className="w-14 h-14 rounded-2xl bg-orange-100 flex items-center justify-center text-orange-600 mb-6 shadow-sm">
+                                        <Icon name="layout-dashboard" />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-800 mb-3">Unified Dashboard</h3>
+                                    <p className="text-slate-600 text-sm leading-relaxed">
+                                        Dynamic Legacy Score evaluating estate readiness, activity feeds, and active Stripe subscription management to ensure perpetual storage.
+                                    </p>
+                                </motion.div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {}
+                    <section id="security" className="py-24">
+                        <div className="max-w-5xl mx-auto px-6">
+                            <div className="bg-slate-900 rounded-[50px] p-12 lg:p-20 text-white shadow-2xl relative overflow-hidden">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 blur-3xl rounded-full"></div>
+                                
+                                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-amber-400 text-[10px] font-black tracking-[0.2em] uppercase mb-8">
+                                    <Icon name="shield-check" className="w-3 h-3" /> The Technical Moat
+                                </div>
+                                
+                                <h2 className="text-4xl lg:text-5xl font-serif font-medium mb-8">Zero-Trust. Zero-Knowledge.</h2>
+                                <p className="text-slate-400 text-lg leading-relaxed mb-12">
+                                    MyEpitaph servers do not hold decryption keys. Even under legal compulsion or database breach, stored records remain unreadable ciphertext.
+                                </p>
+                                
+                                <div className="space-y-6">
+                                    <div className="flex gap-4 border-l-2 border-amber-500 pl-6">
+                                        <div>
+                                            <h4 className="text-lg font-bold text-amber-400 mb-1">1. Client-Side AES-256</h4>
+                                            <p className="text-sm text-slate-400">All sensitive data is encrypted via crypto-js locally. Keys reside only in volatile browser memory and are wiped upon sign-out.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-4 border-l-2 border-teal-500 pl-6">
+                                        <div>
+                                            <h4 className="text-lg font-bold text-teal-400 mb-1">2. Strict Firestore Rules</h4>
+                                            <p className="text-sm text-slate-400">Data collections are rigidly isolated. Updates strictly enforce `.diff().affectedKeys()` to prevent status or ownership tampering.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-4 border-l-2 border-sky-500 pl-6">
+                                        <div>
+                                            <h4 className="text-lg font-bold text-sky-400 mb-1">3. Server-Side Secret Isolation</h4>
+                                            <p className="text-sm text-slate-400">Gemini AI and Stripe Webhooks are handled via secure Node.js/Express proxies, never exposing keys to the client bundle.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {}
+                    <section id="financials" className="py-32 relative">
+                        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+                            <div>
+                                <h2 className="text-5xl lg:text-7xl font-serif font-medium text-slate-800 mb-8">The Ask.</h2>
+                                <p className="text-xl text-slate-600 italic mb-8 font-serif leading-relaxed">
+                                    We are raising <strong>HKD 4,500,000</strong> to fund 18-24 months of advanced engineering, legal structuring for prepaid escrow, and GTM launch.
+                                </p>
+                                <p className="text-sm text-slate-500 mb-12 leading-relaxed">
+                                    Maintaining a military-grade encrypted vault alongside a FinTech-adjacent WebGL 3D e-commerce engine requires senior-level security and full-stack talent.
+                                </p>
+                                
+                                <div className="space-y-6">
+                                    <div className="flex items-center gap-6 p-6 bg-white/60 rounded-3xl shadow-sm border border-amber-100/50">
+                                        <div className="text-3xl font-black text-amber-500 w-24 text-center">55%</div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-800 text-sm uppercase tracking-wide">Engineering & Security</h4>
+                                            <p className="text-xs text-slate-500 mt-1">Senior React/Three.js Dev, Crypto Backend (HKD ~2.47M)</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-6 p-6 bg-white/60 rounded-3xl shadow-sm border border-sky-100/50">
+                                        <div className="text-3xl font-black text-sky-500 w-24 text-center">20%</div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-800 text-sm uppercase tracking-wide">Legal, Escrow & Compliance</h4>
+                                            <p className="text-xs text-slate-500 mt-1">Zero-Knowledge/PDPO Audits, Escrow setup (HKD ~900k)</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-6 p-6 bg-white/60 rounded-3xl shadow-sm border border-teal-100/50">
+                                        <div className="text-3xl font-black text-teal-500 w-24 text-center">25%</div>
+                                        <div>
+                                            <h4 className="font-bold text-slate-800 text-sm uppercase tracking-wide">Infra & Operations</h4>
+                                            <p className="text-xs text-slate-500 mt-1">Firebase, Gemini API, GTM execution (HKD ~1.12M)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div className="glass-card p-16 rounded-[60px] text-center relative overflow-hidden flex flex-col justify-center items-center">
+                                <div className="w-24 h-24 bg-amber-100 rounded-full flex items-center justify-center text-amber-500 mb-8">
+                                    <Icon name="rocket" className="w-10 h-10" />
+                                </div>
+                                <h3 className="text-3xl font-bold text-slate-800 mb-4">Ready for Due Diligence.</h3>
+                                <p className="text-slate-600 mb-10 leading-relaxed">
+                                    Our prototype proves our technical capability in executing 3D WebGL, AES-256 encryption, and AI generation. We are ready to scale.
+                                </p>
+                                <button onClick={handleOpenModal} className="w-full bg-slate-900 text-white py-5 rounded-2xl font-bold hover:bg-slate-800 transition-all shadow-xl block cursor-pointer">
+                                    Contact Founders for Access
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    {}
+                    <section className="py-32 relative">
+                        <div className="max-w-4xl mx-auto px-6 text-center">
+                            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/60 border border-amber-200 text-amber-700 text-[10px] font-black tracking-[0.2em] uppercase mb-10 shadow-sm">
+                                <Icon name="cpu" className="w-3 h-3" /> StillSpeaking Simulator
+                            </div>
+                            <h2 className="text-5xl lg:text-7xl font-serif font-medium text-slate-800 mb-8">Experience the Echo.</h2>
+                            <p className="text-slate-600 mb-16 text-xl font-light max-w-2xl mx-auto">Interact with the LLM concept that powers our scheduled legacy messaging.</p>
+                            
+                            <div className="glass-card p-12 rounded-[50px] text-left">
+                                <label className="block text-[10px] font-black uppercase tracking-[0.3em] text-amber-600 mb-6">Input: A Topic for Your Loved Ones</label>
+                                <input 
+                                    type="text"
+                                    value={aiInput}
+                                    onChange={(e) => setAiInput(e.target.value)}
+                                    placeholder="e.g., Don't be sad about my departure..."
+                                    className="w-full bg-white/50 border-0 border-b-2 border-amber-200 rounded-none py-4 text-2xl text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 transition-all mb-12 font-serif italic"
+                                />
+                                <button 
+                                    onClick={handleDemo}
+                                    disabled={loading || !aiInput}
+                                    className="w-full ethereal-button text-white py-5 rounded-2xl font-black uppercase tracking-widest disabled:opacity-50 flex items-center justify-center gap-3 shadow-lg"
+                                >
+                                    {loading ? <Icon name="loader" className="animate-spin" /> : <Icon name="sparkles" />}
+                                    Generate Voice Echo
+                                </button>
+
+                                {aiOutput && (
+                                    <motion.div 
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="mt-12 p-10 bg-amber-50/50 border border-amber-100 rounded-[30px]"
+                                    >
+                                        <p className="text-slate-700 text-3xl font-serif italic leading-relaxed">"{aiOutput}"</p>
+                                    </motion.div>
+                                )}
+                            </div>
+                        </div>
+                    </section>
+
+                    {}
+                    <footer className="py-24 border-t border-slate-200/50 text-center relative z-10">
+                        <div className="max-w-7xl mx-auto px-6 flex flex-col items-center gap-10">
+                            <div className="flex items-center gap-3 text-slate-800 font-black text-2xl">
+                                <Icon name="feather" className="text-amber-500 w-8 h-8"/> MyEpitaph
+                            </div>
+                            <p className="text-slate-500 text-sm max-w-md mx-auto leading-relaxed">
+                                The Unified Legacy Engine.<br/>
+                                Zero-Knowledge. Zero-Trust. Total Peace of Mind.
+                            </p>
+                            <div className="flex gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-6">
+                                <button onClick={handleOpenModal} className="hover:text-amber-600 transition-colors uppercase tracking-[0.2em] font-black cursor-pointer">Prototype (Upon Request)</button>
+                                <a href="#" className="hover:text-amber-600 transition-colors">Tech Stack</a>
+                                <a href="#" className="hover:text-amber-600 transition-colors">Contact</a>
+                            </div>
+                            <p className="text-slate-400 text-[10px] mt-10 uppercase tracking-widest">&copy; 2026 MyEpitaph.</p>
+                        </div>
+                    </footer>
+
+                    {/* Prototype Access Modal */}
+                    {showContactModal && (
+                        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+                            <motion.div 
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={handleCloseModal}
+                                className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm cursor-pointer"
+                            ></motion.div>
+                            
+                            <motion.div 
+                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                                className="relative bg-white rounded-[40px] p-8 sm:p-12 max-w-lg w-full shadow-2xl overflow-hidden z-10"
+                            >
+                                <button onClick={handleCloseModal} className="absolute top-6 right-6 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 p-2 rounded-full transition-colors">
+                                    <Icon name="x" className="w-5 h-5" />
+                                </button>
+                                
+                                {formStatus === 'success' ? (
+                                    <motion.div 
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        className="text-center py-10"
+                                    >
+                                        <div className="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                                            <Icon name="check" className="w-10 h-10" />
+                                        </div>
+                                        <h3 className="text-3xl font-serif font-medium text-slate-800 mb-4">Request Sent</h3>
+                                        <p className="text-slate-600 mb-8 leading-relaxed">Thank you. Our founding team will review your request and provision your secure prototype access credentials shortly.</p>
+                                        <button onClick={handleCloseModal} className="ethereal-button w-full py-4 rounded-2xl font-bold text-white">Return to Pitch</button>
+                                    </motion.div>
+                                ) : (
+                                    <div className="text-left">
+                                        <div className="mb-8">
+                                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-[10px] font-black tracking-[0.2em] uppercase mb-4">
+                                                <Icon name="lock" className="w-3 h-3" /> Secure Access
+                                            </div>
+                                            <h3 className="text-3xl font-serif font-medium text-slate-800 mb-2">Request Prototype</h3>
+                                            <p className="text-slate-500 text-sm leading-relaxed">Please provide your details. Due to the sensitive nature of the AES-256 encrypted vault, access is manually provisioned.</p>
+                                        </div>
+                                        
+                                        <form onSubmit={handleFormSubmit} className="space-y-5">
+                                            <div>
+                                                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Full Name *</label>
+                                                <input required type="text" value={formState.name} onChange={e => setFormState({...formState, name: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all" placeholder="e.g. John Doe" />
+                                            </div>
+                                            <div>
+                                                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Work Email *</label>
+                                                <input required type="email" value={formState.email} onChange={e => setFormState({...formState, email: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all" placeholder="john@venturecapital.com" />
+                                            </div>
+                                            <div className="grid grid-cols-2 gap-5">
+                                                <div>
+                                                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Company</label>
+                                                    <input type="text" value={formState.company} onChange={e => setFormState({...formState, company: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all" placeholder="Firm LLC" />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Phone</label>
+                                                    <input type="tel" value={formState.phone} onChange={e => setFormState({...formState, phone: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 transition-all" placeholder="+1 (555) 000-0000" />
+                                                </div>
+                                            </div>
+                                            <button type="submit" disabled={formStatus === 'submitting'} className="ethereal-button w-full py-4 rounded-2xl font-bold text-white mt-4 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed">
+                                                {formStatus === 'submitting' ? <Icon name="loader" className="animate-spin w-5 h-5" /> : 'Submit Request'}
+                                            </button>
+                                        </form>
+                                    </div>
+                                )}
+                            </motion.div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
