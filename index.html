@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wabi Tov Studio — MyEpitaph</title>
+    <meta name="description" content="A private, dignified place for the words and wishes that matter most. MyEpitaph is the first project from Wabi Tov Studio in Hong Kong.">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -86,14 +87,15 @@
     <!-- Nav -->
     <nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-white/40 border-b border-amber-100/50">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2 font-black text-slate-800 tracking-tight">
+            <a href="index.html" class="flex items-center gap-2 font-black text-slate-800 tracking-tight">
                 <span class="font-serif text-2xl">侘坊</span>
                 <span class="text-xs uppercase tracking-[0.25em] text-amber-700 hidden sm:inline">Wabi Tov Studio</span>
-            </div>
+            </a>
             <div class="hidden md:flex items-center gap-8 text-[11px] font-bold uppercase tracking-[0.15em] text-slate-600">
                 <a href="#philosophy" class="hover:text-amber-600 transition-colors">The Problem</a>
                 <a href="#product" class="hover:text-amber-600 transition-colors">MyEpitaph</a>
                 <a href="#studio" class="hover:text-amber-600 transition-colors">The Studio</a>
+                <a href="notes/index.html" class="hover:text-amber-600 transition-colors">Notes</a>
                 <a href="#contact" class="ethereal-button px-5 py-2 rounded-full tracking-[0.15em]">Get in Touch</a>
             </div>
         </div>
@@ -139,18 +141,22 @@
 
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="p-8 bg-amber-50/50 rounded-[28px] border border-amber-100/50 text-left">
-                        <div class="w-12 h-12 bg-amber-200/50 rounded-full flex items-center justify-center text-amber-700 mb-5">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-amber-600 mb-5 shadow-sm">
                             <i data-lucide="heart"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-800 mb-3">The Emotional Legacy</h3>
-                        <p class="text-slate-600 leading-relaxed text-sm">Sentiments, guidance, memories, and farewell messages meant for loved ones — too often lost, or left unspoken.</p>
+                        <h3 class="text-lg font-bold text-slate-800 mb-3">The words that were never said</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Sentiments, guidance, memories, and farewell messages meant for the people we love most.
+                        </p>
                     </div>
-                    <div class="p-8 bg-sky-50/50 rounded-[28px] border border-sky-100/50 text-left">
-                        <div class="w-12 h-12 bg-sky-200/50 rounded-full flex items-center justify-center text-sky-700 mb-5">
-                            <i data-lucide="briefcase"></i>
+                    <div class="p-8 bg-amber-50/50 rounded-[28px] border border-amber-100/50 text-left">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-amber-600 mb-5 shadow-sm">
+                            <i data-lucide="key"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-800 mb-3">The Practical Reality</h3>
-                        <p class="text-slate-600 leading-relaxed text-sm">Locked accounts, forgotten subscriptions, scattered documents, and funeral wishes no one had written down.</p>
+                        <h3 class="text-lg font-bold text-slate-800 mb-3">The details no one wrote down</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            Locked accounts, subscriptions, hidden documents, and the practical instructions families are left to guess at.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -158,46 +164,26 @@
     </section>
 
     <!-- Product -->
-    <section id="product" class="py-28 relative">
+    <section id="product" class="py-24 relative z-10">
         <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16 reveal">
-                <div class="inline-flex items-center gap-2 text-amber-600 font-black text-2xl mb-4">
-                    <i data-lucide="feather" class="w-7 h-7"></i> MyEpitaph
+            <div class="text-center mb-14 reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-[10px] font-black tracking-[0.2em] uppercase mb-6">
+                    <i data-lucide="feather" class="w-3 h-3"></i> Introducing
                 </div>
-                <h2 class="font-serif font-medium text-slate-800 mb-5 text-3xl lg:text-5xl">A dignified place for what matters most</h2>
-                <p class="text-slate-600 font-light text-lg max-w-2xl mx-auto">
-                    A private, encrypted platform connecting a person with the people they trust — built in Hong Kong, with data kept in Hong Kong.
+                <h2 class="font-serif font-medium text-slate-800 mb-4 text-3xl lg:text-5xl">MyEpitaph</h2>
+                <p class="text-lg text-slate-600 font-light max-w-2xl mx-auto">
+                    A private, dignified place for the words and wishes that matter most.
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
                 <div class="glass-card p-8 rounded-[32px]">
                     <div class="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center text-amber-600 mb-5 shadow-sm">
-                        <i data-lucide="mail"></i>
+                        <i data-lucide="feather"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-800 mb-3">Encrypted Messages</h3>
+                    <h3 class="text-lg font-bold text-slate-800 mb-3">Farewell Letters</h3>
                     <p class="text-slate-600 text-sm leading-relaxed">
-                        Compose deeply personal farewell letters, protected with strong encryption and released only by someone you trust, when the time is right.
-                    </p>
-                </div>
-
-                <div class="glass-card p-8 rounded-[32px]">
-                    <div class="w-14 h-14 rounded-2xl bg-sky-100 flex items-center justify-center text-sky-600 mb-5 shadow-sm">
-                        <i data-lucide="calendar-clock"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-800 mb-3">Messages Across Time</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Prepare words for the milestones you won't be there for — a birthday, a wedding, a quiet morning years from now.
-                    </p>
-                </div>
-
-                <div class="glass-card p-8 rounded-[32px]">
-                    <div class="w-14 h-14 rounded-2xl bg-teal-100 flex items-center justify-center text-teal-600 mb-5 shadow-sm">
-                        <i data-lucide="box"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-800 mb-3">Memorial Designer</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Thoughtfully design a personal, eco-conscious memorial — a small act of intention, made calm and unhurried.
+                        Composed with care, and only ever delivered when and how you have chosen — to the people you have chosen.
                     </p>
                 </div>
 
@@ -301,10 +287,10 @@
                     We're building quietly, and speaking with people who care about this work — collaborators, advisors, partners in estate planning, insurance, and end-of-life care, and anyone who simply understands why it matters.
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="mailto:hello@myepitaph.tech?subject=Hello%20from%20LinkedIn" class="ethereal-button px-9 py-4 rounded-full text-base font-bold flex items-center justify-center gap-3">
+                    <a href="mailto:hello@myepitaph.tech?subject=Hello%20from%20myepitaph.tech" class="ethereal-button px-9 py-4 rounded-full text-base font-bold flex items-center justify-center gap-3">
                         <i data-lucide="mail" class="w-5 h-5"></i> Say Hello
                     </a>
-                    <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="bg-white/80 text-slate-700 border border-amber-200/50 px-9 py-4 rounded-full text-base font-bold hover:bg-white transition-all shadow-sm flex items-center justify-center gap-2">
+                    <a href="https://www.linkedin.com/company/tovi-studio/" target="_blank" rel="noopener" class="bg-white/80 text-slate-700 border border-amber-200/50 px-9 py-4 rounded-full text-base font-bold hover:bg-white transition-all shadow-sm flex items-center justify-center gap-2">
                         <i data-lucide="linkedin" class="w-5 h-5"></i> Follow on LinkedIn
                     </a>
                 </div>
@@ -322,13 +308,17 @@
                 Building digital products for life's most meaningful moments.<br>
                 MyEpitaph — a dignified place for what matters most.
             </p>
+            <div class="flex items-center gap-6 text-xs text-slate-500 uppercase tracking-[0.2em]">
+                <a href="notes/index.html" class="hover:text-amber-600 transition-colors">Notes</a>
+                <a href="mailto:hello@myepitaph.tech" class="hover:text-amber-600 transition-colors">Contact</a>
+                <a href="https://www.linkedin.com/company/tovi-studio/" target="_blank" rel="noopener" class="hover:text-amber-600 transition-colors">LinkedIn</a>
+            </div>
             <p class="text-slate-400 text-[10px] mt-4 uppercase tracking-widest">© 2026 Wabi Tov Studio · Hong Kong</p>
         </div>
     </footer>
 
     <script>
         lucide.createIcons();
-        // Scroll reveal
         const io = new IntersectionObserver((entries) => {
             entries.forEach(e => {
                 if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
