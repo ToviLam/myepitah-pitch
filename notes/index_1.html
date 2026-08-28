@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes — Wabi Tov Studio</title>
+    <meta name="description" content="Notes from Wabi Tov Studio — considered writing on privacy, dignity, and building for the moments that matter most.">
+
+    <meta property="og:title" content="Notes — Wabi Tov Studio">
+    <meta property="og:description" content="Considered writing on privacy, dignity, and building for the moments that matter most.">
+    <meta property="og:url" content="https://myepitaph.tech/notes/">
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --heaven-bg: #fffbf0;
+            --ink: #422006;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--heaven-bg);
+            color: var(--ink);
+            overflow-x: hidden;
+        }
+        .font-serif { font-family: 'Playfair Display', serif; }
+
+        .bg-ascension {
+            background-image: url('https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center bottom;
+            background-attachment: fixed;
+            position: fixed;
+            inset: 0;
+            z-index: -20;
+            opacity: 0.30;
+        }
+
+        .glass-card {
+            background: rgba(255, 252, 245, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 40px -10px rgba(217, 119, 6, 0.08);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 30px 60px -12px rgba(217, 119, 6, 0.15);
+        }
+        .glass-card.static:hover {
+            transform: none;
+            box-shadow: 0 20px 40px -10px rgba(217, 119, 6, 0.08);
+        }
+
+        .ethereal-button {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #fff;
+            box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .ethereal-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px -5px rgba(217, 119, 6, 0.5);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { opacity: 0; }
+        .reveal.in { animation: fadeUp 0.8s cubic-bezier(0.4,0,0.2,1) forwards; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .reveal.in { animation: none; }
+            .reveal { opacity: 1; }
+            .bg-ascension { background-attachment: scroll; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-ascension"></div>
+
+    <!-- Nav -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-white/40 border-b border-amber-100/50">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-2 font-black text-slate-800 tracking-tight">
+                <span class="font-serif text-2xl">侘坊</span>
+                <span class="text-xs uppercase tracking-[0.25em] text-amber-700 hidden sm:inline">Wabi Tov Studio</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-[11px] font-bold uppercase tracking-[0.15em] text-slate-600">
+                <a href="../index.html#philosophy" class="hover:text-amber-600 transition-colors">The Problem</a>
+                <a href="../index.html#product" class="hover:text-amber-600 transition-colors">MyEpitaph</a>
+                <a href="../index.html#studio" class="hover:text-amber-600 transition-colors">The Studio</a>
+                <a href="index.html" class="text-amber-600 border-b-2 border-amber-500 pb-0.5">Notes</a>
+                <a href="../index.html#contact" class="ethereal-button px-5 py-2 rounded-full tracking-[0.15em]">Get in Touch</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="relative pt-40 pb-16 px-6">
+        <div class="max-w-3xl mx-auto text-center relative z-10">
+            <div class="reveal in inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-white/70 border border-amber-100 text-amber-700 text-[11px] font-bold tracking-[0.25em] uppercase mb-10 shadow-sm backdrop-blur-md">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                Notes from the studio
+            </div>
+
+            <h1 class="reveal in font-serif font-medium leading-[1.1] text-slate-800 mb-8 text-4xl lg:text-6xl" style="animation-delay:0.1s">
+                Considered writing<br>
+                on <span class="italic text-amber-600">what matters</span>.
+            </h1>
+
+            <p class="reveal in text-lg text-slate-600 max-w-xl mx-auto font-light leading-relaxed" style="animation-delay:0.2s">
+                Occasional notes on privacy, dignity, and building for the moments that matter most. Written slowly, published only when there is something worth saying.
+            </p>
+        </div>
+    </header>
+
+    <!-- Notes list -->
+    <section class="py-16 relative z-10">
+        <div class="max-w-3xl mx-auto px-6 space-y-6">
+
+            <!-- Published note: Couch and cabinet -->
+            <article class="reveal">
+                <a href="couch-and-cabinet.html" class="block glass-card p-8 lg:p-10 rounded-[32px] group">
+                    <div class="flex items-center gap-3 mb-4 text-[10px] font-bold uppercase tracking-[0.2em]">
+                        <time datetime="2026-08-28" class="text-amber-700">28 August 2026</time>
+                        <span class="text-slate-400">·</span>
+                        <span class="text-slate-500">4 min read</span>
+                    </div>
+                    <h2 class="font-serif text-2xl lg:text-3xl text-slate-800 font-medium leading-tight mb-4 group-hover:text-amber-700 transition-colors">
+                        The couch and the cabinet
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed font-light">
+                        In August 2018, Aretha Franklin died without a formal will. What her family found in her home, and the five years that followed, is the sharpest version of a smaller story most families quietly live through.
+                    </p>
+                    <div class="mt-6 flex items-center gap-2 text-amber-700 text-sm font-bold uppercase tracking-[0.15em]">
+                        Read the note <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Upcoming -->
+            <div class="reveal glass-card static p-8 lg:p-10 rounded-[32px] text-center opacity-70">
+                <div class="text-[10px] font-bold uppercase tracking-[0.25em] text-amber-700 mb-4">Coming next</div>
+                <h3 class="font-serif text-xl lg:text-2xl text-slate-700 font-medium leading-tight mb-3">
+                    Privacy is a design decision, not a setting
+                </h3>
+                <p class="text-slate-500 text-sm font-light leading-relaxed max-w-xl mx-auto">
+                    On the difference between adding a privacy toggle and choosing an architecture where the wrong thing cannot happen in the first place.
+                </p>
+            </div>
+
+            <div class="reveal glass-card static p-8 lg:p-10 rounded-[32px] text-center opacity-70">
+                <div class="text-[10px] font-bold uppercase tracking-[0.25em] text-amber-700 mb-4">And then</div>
+                <h3 class="font-serif text-xl lg:text-2xl text-slate-700 font-medium leading-tight mb-3">
+                    On taking care of the people who will still be here
+                </h3>
+                <p class="text-slate-500 text-sm font-light leading-relaxed max-w-xl mx-auto">
+                    On the quiet, practical work of getting a family through a loss — and why more of us are choosing to make it easier.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Follow along -->
+    <section class="py-24 relative z-10">
+        <div class="max-w-2xl mx-auto px-6 text-center">
+            <div class="reveal glass-card p-10 lg:p-14 rounded-[44px]">
+                <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center text-amber-500 mb-6 mx-auto">
+                    <i data-lucide="feather" class="w-7 h-7"></i>
+                </div>
+                <h2 class="font-serif font-medium text-slate-800 mb-4 text-2xl lg:text-3xl">
+                    Follow along
+                </h2>
+                <p class="text-slate-600 mb-8 leading-relaxed font-light max-w-md mx-auto">
+                    New notes are announced on LinkedIn. There is no email list yet — we would rather write something worth reading than build a mailing infrastructure first.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-3">
+                    <a href="https://www.linkedin.com/company/tovi-studio/" target="_blank" rel="noopener" class="bg-white/80 text-slate-700 border border-amber-200/50 px-8 py-3 rounded-full text-sm font-bold hover:bg-white transition-all shadow-sm flex items-center justify-center gap-2">
+                        <i data-lucide="linkedin" class="w-4 h-4"></i> Follow on LinkedIn
+                    </a>
+                    <a href="mailto:hello@myepitaph.tech?subject=Hello%20from%20the%20notes%20page" class="bg-white/80 text-slate-700 border border-amber-200/50 px-8 py-3 rounded-full text-sm font-bold hover:bg-white transition-all shadow-sm flex items-center justify-center gap-2">
+                        <i data-lucide="mail" class="w-4 h-4"></i> Say hello
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 border-t border-slate-200/50 text-center relative z-10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col items-center gap-6">
+            <a href="../index.html" class="flex items-center gap-3 text-slate-800 font-black text-xl">
+                <span class="font-serif text-2xl">侘坊</span> Wabi Tov Studio
+            </a>
+            <p class="text-slate-500 text-sm max-w-md mx-auto leading-relaxed">
+                Building digital products for life's most meaningful moments.<br>
+                MyEpitaph — a dignified place for what matters most.
+            </p>
+            <div class="flex items-center gap-6 text-xs text-slate-500 uppercase tracking-[0.2em]">
+                <a href="index.html" class="hover:text-amber-600 transition-colors">Notes</a>
+                <a href="mailto:hello@myepitaph.tech" class="hover:text-amber-600 transition-colors">Contact</a>
+                <a href="https://www.linkedin.com/company/tovi-studio/" target="_blank" rel="noopener" class="hover:text-amber-600 transition-colors">LinkedIn</a>
+            </div>
+            <p class="text-slate-400 text-[10px] mt-4 uppercase tracking-widest">© 2026 Wabi Tov Studio · Hong Kong</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => {
+            if (!el.classList.contains('in')) io.observe(el);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The couch and the cabinet — Wabi Tov Studio</title>
+    <meta name="description" content="On what a family is left with when the person who understood everything is gone — and the quiet shift toward writing things down while there is still time.">
+
+    <meta property="og:title" content="The couch and the cabinet">
+    <meta property="og:description" content="On what a family is left with when the person who understood everything is gone — and the quiet shift toward writing things down while there is still time.">
+    <meta property="og:url" content="https://myepitaph.tech/notes/couch-and-cabinet.html">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2026-08-28">
+    <meta property="article:author" content="Karen Lam">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --heaven-bg: #fffbf0;
+            --ink: #422006;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--heaven-bg);
+            color: var(--ink);
+            overflow-x: hidden;
+        }
+        .font-serif { font-family: 'Playfair Display', serif; }
+
+        .bg-ascension {
+            background-image: url('https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center bottom;
+            background-attachment: fixed;
+            position: fixed;
+            inset: 0;
+            z-index: -20;
+            opacity: 0.22;
+        }
+
+        .glass-card {
+            background: rgba(255, 252, 245, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 40px -10px rgba(217, 119, 6, 0.08);
+        }
+
+        .ethereal-button {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #fff;
+            box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .ethereal-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px -5px rgba(217, 119, 6, 0.5);
+        }
+
+        .prose-note {
+            font-size: 1.075rem;
+            line-height: 1.75;
+            color: #3f3f46;
+        }
+        .prose-note p {
+            margin-bottom: 1.5em;
+        }
+        .prose-note p.lead-in {
+            margin-top: 2.5em;
+            color: #1e293b;
+            font-weight: 600;
+        }
+        .prose-note blockquote {
+            border-left: 3px solid #d97706;
+            padding-left: 1.5em;
+            margin: 2em 0;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2em;
+            color: #52525b;
+            line-height: 1.5;
+        }
+        .prose-note blockquote cite {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            font-style: normal;
+            font-size: 0.75em;
+            color: #71717a;
+            margin-top: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+        .prose-note em { font-style: italic; }
+        .prose-note strong { font-weight: 600; color: #1e293b; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { opacity: 0; }
+        .reveal.in { animation: fadeUp 0.8s cubic-bezier(0.4,0,0.2,1) forwards; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .reveal.in { animation: none; }
+            .reveal { opacity: 1; }
+            .bg-ascension { background-attachment: scroll; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-ascension"></div>
+
+    <!-- Nav -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-white/40 border-b border-amber-100/50">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-2 font-black text-slate-800 tracking-tight">
+                <span class="font-serif text-2xl">侘坊</span>
+                <span class="text-xs uppercase tracking-[0.25em] text-amber-700 hidden sm:inline">Wabi Tov Studio</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-[11px] font-bold uppercase tracking-[0.15em] text-slate-600">
+                <a href="../index.html#philosophy" class="hover:text-amber-600 transition-colors">The Problem</a>
+                <a href="../index.html#product" class="hover:text-amber-600 transition-colors">MyEpitaph</a>
+                <a href="../index.html#studio" class="hover:text-amber-600 transition-colors">The Studio</a>
+                <a href="index.html" class="text-amber-600 border-b-2 border-amber-500 pb-0.5">Notes</a>
+                <a href="../index.html#contact" class="ethereal-button px-5 py-2 rounded-full tracking-[0.15em]">Get in Touch</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-28 pb-4 px-6 max-w-3xl mx-auto">
+        <a href="index.html" class="reveal in inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500 hover:text-amber-700 transition-colors">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> All notes
+        </a>
+    </div>
+
+    <article class="pb-16 px-6">
+        <div class="max-w-3xl mx-auto">
+
+            <header class="reveal in mb-12" style="animation-delay:0.1s">
+                <div class="flex items-center gap-3 mb-6 text-[10px] font-bold uppercase tracking-[0.25em] text-amber-700">
+                    <time datetime="2026-08-28">28 August 2026</time>
+                    <span class="text-slate-400">·</span>
+                    <span class="text-slate-500">Karen Lam · 4 min read</span>
+                </div>
+
+                <h1 class="font-serif font-medium leading-[1.1] text-slate-800 text-4xl lg:text-5xl">
+                    The couch and the cabinet
+                </h1>
+
+                <p class="mt-6 text-xl text-slate-600 font-light leading-relaxed font-serif italic">
+                    On what a family is left with when the person who understood everything is gone — and the quiet shift toward writing things down while there is still time.
+                </p>
+            </header>
+
+            <div class="reveal in glass-card p-8 lg:p-12 rounded-[32px] prose-note" style="animation-delay:0.2s">
+
+                <p>
+                    When Aretha Franklin died of pancreatic cancer in August 2018, she left behind four sons, four homes, decades of music copyrights, and — as far as anyone knew — no will.
+                </p>
+
+                <p>
+                    A few months later, her niece Sabrina Owens was managing the estate and searching the Queen of Soul's suburban Detroit home for anything that might indicate what she wanted. She found something in a locked cabinet: a 2010 document, notarised, that read like a will. And then she found something else — a four-page document, drafted in 2014, handwritten in a spiral notebook, wedged between couch cushions.
+                </p>
+
+                <p>
+                    Both were in Aretha's handwriting. The two versions said different things. Neither had been discussed with her sons.
+                </p>
+
+                <p>
+                    What followed was five years of court battles between three of her four sons, each reading their mother's intentions differently. The dispute was not really about money — it was about which document reflected who she was at the end.
+                </p>
+
+                <blockquote>
+                    We just want to exhale right now. It's been a long five years for my family, my children.
+                    <cite>Kecalf Franklin, after the 2023 jury verdict</cite>
+                </blockquote>
+
+                <p>
+                    She was not the first, and she was not the most extreme. Prince died in 2016 with no will and an estate worth $156 million; his six half-siblings spent six years in probate before a settlement was reached, and by then two of them had died. But Aretha's case cut closer, because the space between what she meant and what she left was so small. She <em>had</em> written it down. Twice. She just never told anyone where it was, or which one to follow, or who to ask.
+                </p>
+
+                <p class="lead-in">
+                    The truth is that most families face a smaller version of this.
+                </p>
+
+                <p>
+                    Not $156 million. Not Netflix documentaries. Just the passwords that no one wrote down, the digital photos that lived only in an iCloud nobody could unlock, the safety deposit box whose key was somewhere, and the specific wishes — for the funeral, for the will, for the grandchildren — that were always going to be discussed later.
+                </p>
+
+                <p>
+                    According to Trust &amp; Will's 2025 Estate Planning Report, only 15% of Gen Z have a will. Millennials fare only slightly better at 22%. In total, 55% of Americans have no estate plan at all. The gap is not because younger people don't care — it is because the tools have been built for a generation that isn't them, and the moment always feels too early until it is suddenly too late.
+                </p>
+
+                <p class="lead-in">
+                    Something has shifted, quietly, in the last few years.
+                </p>
+
+                <p>
+                    Between 2020 and 2022, millennials and Gen Z increased their rate of will creation by 63%. In the UK, a fintech called Farewill reported a 465% year-on-year increase in Gen Z wills at the height of the pandemic. There are now about twelve times more Britons under the age of 35 writing wills than before the pandemic.
+                </p>
+
+                <p>
+                    This is not, as the coverage sometimes suggests, morbid. It is the opposite. It is the generation that watched — that watched family members die during the pandemic, that watched celebrity estates unravel in public, that watched their parents guess at what a grandparent would have wanted. They have decided, quietly and pragmatically, to write it down.
+                </p>
+
+                <p>
+                    Some of them are keeping a shared document with a partner. Some are using online will services. Some are just noting, in a private file, which accounts a family member would need access to.
+                </p>
+
+                <p>
+                    The instinct behind all of it is the same: <em>this is not for me. This is for the people who will be here after I am not.</em>
+                </p>
+
+                <p class="lead-in">
+                    MyEpitaph is being built for that instinct.
+                </p>
+
+                <p>
+                    Not for the legal tragedy Aretha's family went through — that requires legislation, not a product. For the quieter thing underneath it. For the words we mean to say. For the practical details that only one person in the family knew. For the wish about a specific song at a specific service, and the passwords, and the small letter to a specific child, held privately, encrypted so that even we cannot read it, and released only when it needs to be.
+                </p>
+
+                <p>
+                    We are building it slowly because it deserves to be built slowly. But we are building it because ten thousand smaller versions of what happened in Detroit are still happening every week — in couches and cabinets, in unsent emails, in the sentences that got interrupted.
+                </p>
+
+                <p>
+                    If any of this feels familiar — if you have watched a family try to piece something together after a loss, or if you have thought lately that you should probably write some of this down — that is not morbid either.
+                </p>
+
+                <p>
+                    It is the beginning of taking care of the people you love.
+                </p>
+
+            </div>
+
+            <div class="reveal mt-12 flex items-start gap-5 p-6 bg-white/50 rounded-[24px] border border-amber-100/70">
+                <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 flex-shrink-0">
+                    <i data-lucide="user" class="w-5 h-5"></i>
+                </div>
+                <div class="text-sm text-slate-600 leading-relaxed">
+                    <p class="font-bold text-slate-800 mb-1">Karen Lam</p>
+                    <p>Founder, Wabi Tov Studio. Works between the business and the data team. Based in Hong Kong.</p>
+                </div>
+            </div>
+
+            <div class="reveal mt-8 flex flex-wrap items-center gap-4">
+                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">Share this note</span>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fmyepitaph.tech%2Fnotes%2Fcouch-and-cabinet.html" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 border border-amber-200/50 text-slate-700 text-xs font-bold hover:bg-white transition-all">
+                    <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
+                </a>
+                <a href="mailto:?subject=Worth%20a%20read&body=https%3A%2F%2Fmyepitaph.tech%2Fnotes%2Fcouch-and-cabinet.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 border border-amber-200/50 text-slate-700 text-xs font-bold hover:bg-white transition-all">
+                    <i data-lucide="mail" class="w-4 h-4"></i> Email
+                </a>
+            </div>
+
+            <div class="reveal mt-16 pt-10 border-t border-amber-100/70 flex flex-col sm:flex-row justify-between items-center gap-6">
+                <a href="index.html" class="inline-flex items-center gap-2 text-sm font-bold text-slate-700 hover:text-amber-700 transition-colors">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> All notes
+                </a>
+                <a href="../index.html#contact" class="ethereal-button px-6 py-3 rounded-full text-sm font-bold flex items-center justify-center gap-2">
+                    <i data-lucide="mail" class="w-4 h-4"></i> Get in touch
+                </a>
+            </div>
+
+        </div>
+    </article>
+
+    <footer class="py-16 border-t border-slate-200/50 text-center relative z-10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col items-center gap-6">
+            <a href="../index.html" class="flex items-center gap-3 text-slate-800 font-black text-xl">
+                <span class="font-serif text-2xl">侘坊</span> Wabi Tov Studio
+            </a>
+            <p class="text-slate-500 text-sm max-w-md mx-auto leading-relaxed">
+                Building digital products for life's most meaningful moments.<br>
+                MyEpitaph — a dignified place for what matters most.
+            </p>
+            <div class="flex items-center gap-6 text-xs text-slate-500 uppercase tracking-[0.2em]">
+                <a href="index.html" class="hover:text-amber-600 transition-colors">Notes</a>
+                <a href="mailto:hello@myepitaph.tech" class="hover:text-amber-600 transition-colors">Contact</a>
+                <a href="https://www.linkedin.com/company/tovi-studio/" target="_blank" rel="noopener" class="hover:text-amber-600 transition-colors">LinkedIn</a>
+            </div>
+            <p class="text-slate-400 text-[10px] mt-4 uppercase tracking-widest">© 2026 Wabi Tov Studio · Hong Kong</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => {
+            if (!el.classList.contains('in')) io.observe(el);
+        });
+    </script>
+</body>
+</html>
