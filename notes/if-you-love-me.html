@@ -1,143 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>If you love me, see me when I am alive | MyEpitaph</title>
-<meta name="description" content="The story behind why I am building MyEpitaph.">
-<meta property="og:title" content="If you love me, see me when I am alive">
-<meta property="og:description" content="The story behind why I am building MyEpitaph.">
-<meta property="og:image" content="./images/01-hero.jpg">
-<meta property="og:type" content="article">
-<style>
-  :root {
-    --text: #2a2a2a;
-    --muted: #888;
-    --accent: #6b5b47;
-    --bg: #fafaf7;
-  }
-  * { box-sizing: border-box; }
-  body {
-    font-family: Georgia, 'Times New Roman', serif;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 3em 1.5em;
-    line-height: 1.75;
-    color: var(--text);
-    background: var(--bg);
-    font-size: 18px;
-  }
-  h1 {
-    font-size: 2.2em;
-    line-height: 1.2;
-    margin: 0 0 0.3em;
-    font-weight: 400;
-  }
-  h2 {
-    font-size: 1.4em;
-    margin-top: 3em;
-    margin-bottom: 0.5em;
-    font-weight: 400;
-    color: var(--accent);
-  }
-  p {
-    margin: 1.2em 0;
-  }
-  img {
-    width: 100%;
-    height: auto;
-    margin: 2.5em 0;
-    display: block;
-    border-radius: 2px;
-  }
-  .meta {
-    color: var(--muted);
-    font-size: 0.9em;
-    margin: 0 0 2em;
-  }
-  a {
-    color: var(--accent);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-  }
-  a:hover {
-    text-decoration-thickness: 2px;
-  }
-  @media (max-width: 600px) {
-    body { padding: 2em 1em; font-size: 17px; }
-    h1 { font-size: 1.8em; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>If you love me, see me when I am alive — Wabi Tov Studio</title>
+    <meta name="description" content="On the moment I keep having at farewells, an idea I filed away in 2010, and what building MyEpitaph has taught me about holding grief, dignity, and cybersecurity in the same design.">
+
+    <meta property="og:title" content="If you love me, see me when I am alive">
+    <meta property="og:description" content="On the moment I keep having at farewells, an idea I filed away in 2010, and what building MyEpitaph has taught me about holding grief, dignity, and cybersecurity in the same design.">
+    <meta property="og:url" content="https://myepitaph.tech/notes/if-you-love-me.html">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://myepitaph.tech/notes/images/01-hero.jpg">
+    <meta property="article:published_time" content="2026-09-07">
+    <meta property="article:author" content="Karen Lam">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --heaven-bg: #fffbf0;
+            --ink: #422006;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--heaven-bg);
+            color: var(--ink);
+            overflow-x: hidden;
+        }
+        .font-serif { font-family: 'Playfair Display', serif; }
+
+        .bg-ascension {
+            background-image: url('https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center bottom;
+            background-attachment: fixed;
+            position: fixed;
+            inset: 0;
+            z-index: -20;
+            opacity: 0.22;
+        }
+
+        .glass-card {
+            background: rgba(255, 252, 245, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 40px -10px rgba(217, 119, 6, 0.08);
+        }
+
+        .ethereal-button {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #fff;
+            box-shadow: 0 10px 25px -5px rgba(217, 119, 6, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .ethereal-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px -5px rgba(217, 119, 6, 0.5);
+        }
+
+        .prose-note {
+            font-size: 1.075rem;
+            line-height: 1.75;
+            color: #3f3f46;
+        }
+        .prose-note p {
+            margin-bottom: 1.5em;
+        }
+        .prose-note p.lead-in {
+            margin-top: 2.5em;
+            color: #1e293b;
+            font-weight: 600;
+        }
+        .prose-note blockquote {
+            border-left: 3px solid #d97706;
+            padding-left: 1.5em;
+            margin: 2em 0;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2em;
+            color: #52525b;
+            line-height: 1.5;
+        }
+        .prose-note blockquote cite {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            font-style: normal;
+            font-size: 0.75em;
+            color: #71717a;
+            margin-top: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+        .prose-note em { font-style: italic; }
+        .prose-note strong { font-weight: 600; color: #1e293b; }
+        .prose-note img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            margin: 2.25em 0;
+            display: block;
+            box-shadow: 0 15px 35px -12px rgba(217, 119, 6, 0.18);
+        }
+        .prose-note h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            color: #1e293b;
+            font-size: 1.65rem;
+            line-height: 1.3;
+            margin-top: 2.75em;
+            margin-bottom: 0.75em;
+        }
+        .prose-note a {
+            color: #b45309;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            font-weight: 500;
+        }
+        .prose-note a:hover { color: #d97706; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { opacity: 0; }
+        .reveal.in { animation: fadeUp 0.8s cubic-bezier(0.4,0,0.2,1) forwards; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .reveal.in { animation: none; }
+            .reveal { opacity: 1; }
+            .bg-ascension { background-attachment: scroll; }
+        }
+    </style>
 </head>
 <body>
+    <div class="bg-ascension"></div>
 
-<article>
+    <!-- Nav -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-white/40 border-b border-amber-100/50">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="../index.html" class="flex items-center gap-2 font-black text-slate-800 tracking-tight">
+                <span class="font-serif text-2xl">侘坊</span>
+                <span class="text-xs uppercase tracking-[0.25em] text-amber-700 hidden sm:inline">Wabi Tov Studio</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-[11px] font-bold uppercase tracking-[0.15em] text-slate-600">
+                <a href="../index.html#philosophy" class="hover:text-amber-600 transition-colors">The Problem</a>
+                <a href="../index.html#product" class="hover:text-amber-600 transition-colors">MyEpitaph</a>
+                <a href="../index.html#studio" class="hover:text-amber-600 transition-colors">The Studio</a>
+                <a href="index.html" class="text-amber-600 border-b-2 border-amber-500 pb-0.5">Notes</a>
+                <a href="../index.html#contact" class="ethereal-button px-5 py-2 rounded-full tracking-[0.15em]">Get in Touch</a>
+            </div>
+        </div>
+    </nav>
 
-<h1>If you love me, see me when I am alive</h1>
-<p class="meta">Karen Lam &middot; September 7, 2026</p>
+    <div class="pt-28 pb-4 px-6 max-w-3xl mx-auto">
+        <a href="index.html" class="reveal in inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500 hover:text-amber-700 transition-colors">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> All notes
+        </a>
+    </div>
 
-<img src="./images/01-hero.jpg" alt="Two ceramic tea cups on a wooden table by a window in an old Hong Kong apartment, with a folded handwritten note and a wilting jasmine flower in a glass vase">
+    <article class="pb-16 px-6">
+        <div class="max-w-3xl mx-auto">
 
-<p>I have said this to my closest people more than once. I mean it plainly. When I am dead, I do not want a viewing. I do not want anyone standing over me wondering if I look peaceful.</p>
+            <header class="reveal in mb-12" style="animation-delay:0.1s">
+                <div class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-amber-700 mb-5">
+                    <span>Notes from the Studio</span>
+                    <span class="text-slate-300">&middot;</span>
+                    <span class="text-slate-500">7 September 2026</span>
+                </div>
+                <h1 class="font-serif font-medium leading-[1.15] text-slate-800 text-4xl lg:text-5xl mb-6">
+                    If you love me,<br>
+                    <span class="italic text-amber-600">see me when I am alive</span>
+                </h1>
+                <p class="text-lg text-slate-600 font-light leading-relaxed">
+                    On the moment I keep having at farewells, an idea I filed away in 2010, and what building MyEpitaph has taught me about holding grief, dignity, and cybersecurity in the same design.
+                </p>
+            </header>
 
-<p>The face bothers me most. Makeup on someone who never wore it. Powder and blush arranged carefully by a stranger. It is meant as care, and I understand that. But it is not the face they knew, and it is not the face I would recognise as mine.</p>
+            <div class="reveal in glass-card p-8 lg:p-12 rounded-[32px] prose-note" style="animation-delay:0.2s">
 
-<p>Every time I have said goodbye to a family member or a friend's family member, I find myself asking the same questions. Is this how they would have wanted to be sent off? What did they want to say that they never got to say? Did anyone know their WhatsApp password? Did they leave the folder of photos unlabeled? Did the funeral songs match the songs they actually loved, or the songs someone else assumed they would want?</p>
+                <img src="images/01-hero.jpg" alt="Two ceramic tea cups on a wooden table by a window in an old Hong Kong apartment, with a folded handwritten note and a wilting jasmine flower in a glass vase">
 
-<h2>An idea from 2010</h2>
+                <p>
+                    I have said this to my closest people more than once. I mean it plainly. When I am dead, I do not want a viewing. I do not want anyone standing over me wondering if I look peaceful.
+                </p>
 
-<img src="./images/02-notebook.jpg" alt="An old leather-bound notebook with pencil sketches of geometric shapes, beside a vintage Canon film camera, cassette tapes, and an empty coffee cup on a wooden desk">
+                <p>
+                    The face bothers me most. Makeup on someone who never wore it. Powder and blush arranged carefully by a stranger. It is meant as care, and I understand that. But it is not the face they knew, and it is not the face I would recognise as mine.
+                </p>
 
-<p>Back in 2010 I had an idea to 3D-print caskets. Custom shapes, custom finishes, made cheaply because you are printing on demand rather than storing a warehouse of them. I never did anything with it.</p>
+                <p>
+                    Every time I have said goodbye to a family member or a friend's family member, I find myself asking the same questions. Is this how they would have wanted to be sent off? What did they want to say that they never got to say? Did anyone know their WhatsApp password? Did they leave the folder of photos unlabeled? Did the funeral songs match the songs they actually loved, or the songs someone else assumed they would want?
+                </p>
 
-<p>Around the same time, a friend in Vancouver told me he could not understand why caskets cost so much when they are used exactly once. Then buried, or burnt. He half-joked that we should rent them. It was a joke that made sense.</p>
+                <h2>An idea from 2010</h2>
 
-<p>I filed both ideas away. They sat there for over a decade.</p>
+                <img src="images/02-notebook.jpg" alt="An old leather-bound notebook with pencil sketches of geometric shapes, beside a vintage Canon film camera, cassette tapes, and an empty coffee cup on a wooden desk">
 
-<h2>The Hong Kong pattern</h2>
+                <p>
+                    Back in 2010 I had an idea to 3D-print caskets. Custom shapes, custom finishes, made cheaply because you are printing on demand rather than storing a warehouse of them. I never did anything with it.
+                </p>
 
-<img src="./images/03-armchair.jpg" alt="A quiet Hong Kong living room in late afternoon, with an empty armchair, jade plant, family photographs, tea set, and a folded newspaper, sunlight filtering through venetian blinds">
+                <p>
+                    Around the same time, a friend in Vancouver told me he could not understand why caskets cost so much when they are used exactly once. Then buried, or burnt. He half-joked that we should rent them. It was a joke that made sense.
+                </p>
 
-<p>In Hong Kong, the older generation does not talk about death. It is not just the taboo around the word 死. It is a whole texture of avoidance &mdash; 4 being unlucky, no discussion of wills at Chinese New Year, no direct conversation about what someone might want when they are gone.</p>
+                <p>
+                    I filed both ideas away. They sat there for over a decade.
+                </p>
 
-<p>Meanwhile more younger people are facing death than a generation ago. Illness earlier. Accidents. Sudden losses. And when the older generation will not open that conversation, the younger generation is left with two options: force the conversation and be considered inappropriate, or carry it quietly and hope nothing happens.</p>
+                <h2>The Hong Kong pattern</h2>
 
-<p>Most people carry it quietly.</p>
+                <img src="images/03-armchair.jpg" alt="A quiet Hong Kong living room in late afternoon, with an empty armchair, jade plant, family photographs, tea set, and a folded newspaper, sunlight filtering through venetian blinds">
 
-<p>The workaround, I have noticed, is that people tell a trusted friend. &ldquo;If anything happens to me, tell them this.&rdquo; &ldquo;Please make sure they play this song.&rdquo; &ldquo;The password to my Instagram is in a note on my laptop.&rdquo; A friend becomes an ad hoc executor, holding fragments of your wishes that the family could not hear.</p>
+                <p>
+                    In Hong Kong, the older generation does not talk about death. It is not just the taboo around the word <span class="font-serif italic text-amber-700">死</span>. It is a whole texture of avoidance &mdash; 4 being unlucky, no discussion of wills at Chinese New Year, no direct conversation about what someone might want when they are gone.
+                </p>
 
-<p>But a friend is not a system. Friends forget. Friends fall out of touch. Passwords change. The notes get deleted when you switch phones. Wishes get lost.</p>
+                <p>
+                    Meanwhile more younger people are facing death than a generation ago. Illness earlier. Accidents. Sudden losses. And when the older generation will not open that conversation, the younger generation is left with two options: force the conversation and be considered inappropriate, or carry it quietly and hope nothing happens.
+                </p>
 
-<h2>What I am building</h2>
+                <p class="lead-in">
+                    Most people carry it quietly.
+                </p>
 
-<img src="./images/04-typing.jpg" alt="Hands typing on a laptop keyboard beside an open notebook with handwritten notes and architectural sketches, a cup of tea, and a small potted plant on a wooden desk in a Hong Kong apartment">
+                <p>
+                    The workaround, I have noticed, is that people tell a trusted friend. <em>&ldquo;If anything happens to me, tell them this.&rdquo; &ldquo;Please make sure they play this song.&rdquo; &ldquo;The password to my Instagram is in a note on my laptop.&rdquo;</em> A friend becomes an ad hoc executor, holding fragments of your wishes that the family could not hear.
+                </p>
 
-<p>MyEpitaph is an after-death preplanning platform. Not a will, not an insurance product &mdash; the preplanning layer that sits between those and the funeral itself.</p>
+                <p>
+                    But a friend is not a system. Friends forget. Friends fall out of touch. Passwords change. The notes get deleted when you switch phones. Wishes get lost.
+                </p>
 
-<p>Four things. First, secure epitaphs &mdash; the words you would want to leave, sealed until you are gone. Second, a vault and executor hub &mdash; the practical materials your family will need, and the person you have authorised to release them. Third, StillSpeaking AI &mdash; a way to leave messages that can respond to your family in your voice, on the events you name in advance. Fourth, the 3D memorial designer, the idea I filed away in 2010, now with eco-friendly casket options that vendors can preorder.</p>
+                <h2>What I am building</h2>
 
-<p>Everything is encrypted end-to-end. Nothing is released without the executor you named. You control what happens, when, and to whom.</p>
+                <img src="images/04-typing.jpg" alt="Hands typing on a laptop keyboard beside an open notebook with handwritten notes and architectural sketches, a cup of tea, and a small potted plant on a wooden desk in a Hong Kong apartment">
 
-<h2>What has surprised me</h2>
+                <p>
+                    MyEpitaph is an after-death preplanning platform. Not a will, not an insurance product &mdash; the preplanning layer that sits between those and the funeral itself.
+                </p>
 
-<p>I deliberately designed the product to avoid legal complexity. The moment you try to be a will substitute or a legal instrument, the entire product becomes a legal minefield across every jurisdiction. So I stayed out of that lane on purpose.</p>
+                <p>
+                    Four things. First, <strong>secure epitaphs</strong> &mdash; the words you would want to leave, sealed until you are gone. Second, a <strong>vault and executor hub</strong> &mdash; the practical materials your family will need, and the person you have authorised to release them. Third, <strong>StillSpeaking AI</strong> &mdash; a way to leave messages that can respond to your family in your voice, on the events you name in advance. Fourth, the <strong>3D memorial designer</strong>, the idea I filed away in 2010, now with eco-friendly casket options that vendors can preorder.
+                </p>
 
-<p>But there is a lane you cannot avoid: the moment you touch passwords, posthumous message release, and third-party access after death, cybersecurity becomes the core of the product, not a feature. This has been an education I did not sign up for. Key management, executor authentication flows, secure vault design &mdash; I have learned more about protecting data in the last year than in a career of using it.</p>
+                <p>
+                    Everything is encrypted end-to-end. Nothing is released without the executor you named. You control what happens, when, and to whom.
+                </p>
 
-<p>A year ago I would have told myself the hard part was the product itself. It is not. The hard part is holding all of this at once &mdash; grief, dignity, security, cultural silence &mdash; in the same design.</p>
+                <h2>What has surprised me</h2>
 
-<h2>Why I am telling you this</h2>
+                <p>
+                    I deliberately designed the product to avoid legal complexity. The moment you try to be a will substitute or a legal instrument, the entire product becomes a legal minefield across every jurisdiction. So I stayed out of that lane on purpose.
+                </p>
 
-<img src="./images/05-envelope.jpg" alt="An empty wooden bench in a Hong Kong urban park at dawn, with a single unopened white envelope resting on the seat, morning mist and banyan trees in the background">
+                <p>
+                    But there is a lane you cannot avoid: the moment you touch passwords, posthumous message release, and third-party access after death, cybersecurity becomes the core of the product, not a feature. This has been an education I did not sign up for. Key management, executor authentication flows, secure vault design &mdash; I have learned more about protecting data in the last year than in a career of using it.
+                </p>
 
-<p>Two reasons. First, if this resonates &mdash; if you have ever thought about what you would want to say and to whom &mdash; I would like you to know a place is being built for it. There is a waitlist on <a href="https://myepitaph.tech">myepitaph.tech</a>.</p>
+                <p class="lead-in">
+                    A year ago I would have told myself the hard part was the product itself.
+                </p>
 
-<p>Second, if you have watched something similar in your own family, or if you are one of the trusted friends holding fragments of someone else's wishes, I would like to hear about it. Message me. This product gets better when it is shaped by people who have lived the problem.</p>
+                <p>
+                    It is not. The hard part is holding all of this at once &mdash; grief, dignity, security, cultural silence &mdash; in the same design.
+                </p>
 
-<p>MyEpitaph is a way to say the things you might not get to say. In your voice. Not a made-up face.</p>
+                <h2>Why I am telling you this</h2>
 
-</article>
+                <img src="images/05-envelope.jpg" alt="An empty wooden bench in a Hong Kong urban park at dawn, with a single unopened white envelope resting on the seat, morning mist and banyan trees in the background">
 
+                <p>
+                    Two reasons. First, if this resonates &mdash; if you have ever thought about what you would want to say and to whom &mdash; I would like you to know a place is being built for it. There is a waitlist on <a href="../index.html#product">myepitaph.tech</a>.
+                </p>
+
+                <p>
+                    Second, if you have watched something similar in your own family, or if you are one of the trusted friends holding fragments of someone else's wishes, I would like to hear about it. <a href="mailto:hello@myepitaph.tech?subject=A%20note%20on%20MyEpitaph">Message me</a>. This product gets better when it is shaped by people who have lived the problem.
+                </p>
+
+                <p>
+                    MyEpitaph is a way to say the things you might not get to say. In your voice. Not a made-up face.
+                </p>
+
+            </div>
+
+            <div class="reveal mt-12 flex items-start gap-5 p-6 bg-white/50 rounded-[24px] border border-amber-100/70">
+                <div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 flex-shrink-0">
+                    <i data-lucide="user" class="w-5 h-5"></i>
+                </div>
+                <div class="text-sm text-slate-600 leading-relaxed">
+                    <p class="font-bold text-slate-800 mb-1">Karen Lam</p>
+                    <p>Founder, Wabi Tov Studio</p>
+                </div>
+            </div>
+
+            <div class="reveal mt-8 flex flex-wrap items-center gap-4">
+                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">Share this note</span>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fmyepitaph.tech%2Fnotes%2Fif-you-love-me.html" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 border border-amber-200/50 text-slate-700 text-xs font-bold hover:bg-white transition-all">
+                    <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
+                </a>
+                <a href="mailto:?subject=Worth%20a%20read&body=https%3A%2F%2Fmyepitaph.tech%2Fnotes%2Fif-you-love-me.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 border border-amber-200/50 text-slate-700 text-xs font-bold hover:bg-white transition-all">
+                    <i data-lucide="mail" class="w-4 h-4"></i> Email
+                </a>
+            </div>
+
+            <div class="reveal mt-16 pt-10 border-t border-amber-100/70 flex flex-col sm:flex-row justify-between items-center gap-6">
+                <a href="index.html" class="inline-flex items-center gap-2 text-sm font-bold text-slate-700 hover:text-amber-700 transition-colors">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> All notes
+                </a>
+                <a href="../index.html#contact" class="ethereal-button px-6 py-3 rounded-full text-sm font-bold flex items-center justify-center gap-2">
+                    <i data-lucide="mail" class="w-4 h-4"></i> Get in touch
+                </a>
+            </div>
+
+        </div>
+    </article>
+
+    <footer class="py-16 border-t border-slate-200/50 text-center relative z-10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col items-center gap-6">
+            <a href="../index.html" class="flex items-center gap-3 text-slate-800 font-black text-xl">
+                <span class="font-serif text-2xl">侘坊</span> Wabi Tov Studio
+            </a>
+            <p class="text-slate-500 text-sm max-w-md mx-auto leading-relaxed">
+                Building digital products for life's most meaningful moments.<br>
+                MyEpitaph &mdash; a dignified place for what matters most.
+            </p>
+            <div class="flex items-center gap-6 text-xs text-slate-500 uppercase tracking-[0.2em]">
+                <a href="index.html" class="hover:text-amber-600 transition-colors">Notes</a>
+                <a href="mailto:hello@myepitaph.tech" class="hover:text-amber-600 transition-colors">Contact</a>
+                <a href="https://www.linkedin.com/company/tovi-studio/" target="_blank" rel="noopener" class="hover:text-amber-600 transition-colors">LinkedIn</a>
+            </div>
+            <p class="text-slate-400 text-[10px] mt-4 uppercase tracking-widest">&copy; 2026 Wabi Tov Studio &middot; Hong Kong</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => {
+            if (!el.classList.contains('in')) io.observe(el);
+        });
+    </script>
 </body>
 </html>
